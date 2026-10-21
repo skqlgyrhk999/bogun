@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대한민국 보건복지부 (MOHW) - 국민과 함께하는 따뜻한 복지·건강한 삶</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons (Inline SVGs utilized for offline/local standalone safety) -->
+</head>
+<body>
+    <!-- 상단 네비게이션 헤더 -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo-area" onclick="scrollToSection('hero')">
+                <div class="logo-emblem">
+                    <svg viewBox="0 0 40 40" width="36" height="36">
+                        <circle cx="20" cy="20" r="19" fill="#000000" />
+                        <!-- 모노크롬 엠블럼 심볼 -->
+                        <path d="M 20 6 A 14 14 0 0 1 20 34 A 7 7 0 0 0 20 20 A 7 7 0 0 1 20 6" fill="#ffffff" />
+                        <path d="M 20 6 A 7 7 0 0 0 20 20 A 7 7 0 0 1 20 34 A 14 14 0 0 1 20 6" fill="#222222" />
+                        <circle cx="20" cy="13" r="2.2" fill="#000000" />
+                        <circle cx="20" cy="27" r="2.2" fill="#ffffff" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="agency-title">대한민국 보건복지부</span>
+                    <span class="agency-subtitle">Ministry of Health and Welfare</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#survey-section" class="nav-link nav-highlight">✨ 지원 자가진단</a>
+                <a href="#about" class="nav-link">소개 및 비전</a>
+                <a href="#services" class="nav-link">주요 업무</a>
+                <a href="#trends" class="nav-link">핵심 정책 동향</a>
+                <a href="#quick-guide" class="nav-link">복지 혜택 검색</a>
+                <a href="#news" class="nav-link">보도자료 & 뉴스</a>
+            </nav>
+
+            <div class="header-action">
+                <a href="https://www.bokjiro.go.kr" target="_blank" class="btn-primary-sm">
+                    복지로 바로가기 ↗
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 히어로 섹션 -->
+    <section id="hero" class="hero-section">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="badge-tag">기본이 튼튼한 복지강국 • 국민 모두가 건강하고 행복한 대한민국</div>
+            <h1 class="hero-title">
+                태어남부터 평생의 든든한 동반자,<br>
+                <span>대한민국 보건복지부</span>입니다.
+            </h1>
+            <p class="hero-desc">
+                보건복지부는 국민 누구나 아플 때 걱정 없이 치료받을 수 있는 탄탄한 의료 안전망과,<br>
+                소외되는 이웃 없이 삶의 존엄을 지킬 수 있는 촘촘한 약자복지를 만들어가고 있습니다.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-number">137.5조 원</div>
+                    <div class="stat-label">2026년 복지·보건 재정 규모</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">전국 확대</div>
+                    <div class="stat-label">의료·요양·돌봄 통합지원 시행</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">국민 100%</div>
+                    <div class="stat-label">생애주기별 맞춤형 사회안전망</div>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#survey-section" class="btn-main">🔍 "나는 어떤 도움을 받을 수 있을까?" 진단하기</a>
+                <a href="#quick-guide" class="btn-secondary">전체 복지 혜택 검색</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 국민 맞춤형 복지 도움 진단 설문 / 체크리스트 섹션 -->
+    <section id="survey-section" class="section survey-wrap">
+        <div class="container">
+            <div class="survey-card-container">
+                <div class="survey-header-area">
+                    <span class="sub-label survey-label">SELF-ASSESSMENT CHECKLIST</span>
+                    <h2>나는 보건복지부로부터 어떤 도움을 받을 수 있을까?</h2>
+                    <p>간단한 설문 체크(약 30초 소요)로 회원가입이나 개인정보 입력 없이 나에게 꼭 맞는 정부 복지 지원 제도와 신청 링크를 즉시 분석해 드립니다.</p>
+                </div>
+
+                <!-- 단계 진행 바 -->
+                <div class="survey-progress-wrapper">
+                    <div class="survey-progress-bar" id="surveyProgressBar" style="width: 25%;"></div>
+                </div>
+                <div class="step-indicator">
+                    <span id="stepIndicatorText">단계 1 / 4 : 대상 및 생애주기</span>
+                </div>
+
+                <form id="welfareSurveyForm" onsubmit="return false;">
+                    <!-- 질문 1: 대상/연령대 -->
+                    <div class="survey-step active" id="surveyStep1">
+                        <div class="question-title">
+                            <span class="q-badge">Q1</span>
+                            <h3>현재 본인 또는 함께 사는 가구원의 해당 상황을 선택해 주세요. (복수 선택 가능)</h3>
+                        </div>
+                        <p class="question-hint">해당되는 항목을 모두 체크하시면 종합 분석됩니다.</p>
+                        <div class="option-grid">
+                            <label class="check-box-card">
+                                <input type="checkbox" name="stage" value="infant" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">👶</div>
+                                    <div class="box-text">
+                                        <strong>임신·출산 준비 / 영유아 (0~7세)</strong>
+                                        <p>임신 중이거나 만 7세 이하 영유아를 양육 중인 부모</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="stage" value="youth" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🧑‍💼</div>
+                                    <div class="box-text">
+                                        <strong>청년 및 일하는 사회초년생 (19~34세)</strong>
+                                        <p>자산형성 저축 지원, 건강검진, 마음건강 상담 필요</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="stage" value="senior" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🧓</div>
+                                    <div class="box-text">
+                                        <strong>만 65세 이상 어르신</strong>
+                                        <p>노후 소득(기초연금), 일자리, 건강검진 및 돌봄 필요</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="stage" value="disability" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">♿</div>
+                                    <div class="box-text">
+                                        <strong>장애인 등록 가구</strong>
+                                        <p>활동보조 지원, 장애인연금, 보조기기, 발달재활 필요</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="stage" value="general" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">👨‍👩‍👧</div>
+                                    <div class="box-text">
+                                        <strong>일반 성인 및 중장년 가구</strong>
+                                        <p>일반 건강보험 혜택, 위기 대응 및 일반 복지 조회</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 질문 2: 건강 및 의료 상황 -->
+                    <div class="survey-step" id="surveyStep2">
+                        <div class="question-title">
+                            <span class="q-badge">Q2</span>
+                            <h3>건강 및 의료비와 관련하여 현재 겪고 계신 어려움이 있으신가요?</h3>
+                        </div>
+                        <p class="question-hint">해당되는 모든 항목을 선택해 주세요.</p>
+                        <div class="option-grid">
+                            <label class="check-box-card">
+                                <input type="checkbox" name="health" value="high_medical" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🏥</div>
+                                    <div class="box-text">
+                                        <strong>과도한 병원비 지출로 가계가 부담스러움</strong>
+                                        <p>중증질환, 수술, 장기 입원으로 의료비 부담이 막대한 경우</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="health" value="infertility" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🧬</div>
+                                    <div class="box-text">
+                                        <strong>난임 시술 및 임신 사전 가임력 검사 필요</strong>
+                                        <p>임신 준비 중이거나 인공수정·시험관 시술비 지원이 필요함</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="health" value="dementia" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🧠</div>
+                                    <div class="box-text">
+                                        <strong>기억력 저하·치매 의심 또는 진단 가족이 있음</strong>
+                                        <p>치매 조기검진, 치료관리비, 안심센터 돌봄 쉼터 이용 필요</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="health" value="mental" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🌱</div>
+                                    <div class="box-text">
+                                        <strong>우울감, 스트레스, 심리상담(마음건강) 필요</strong>
+                                        <p>전국민 마음투자 지원사업, 청년 및 직장인 심리바우처</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="health" value="none" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">✅</div>
+                                    <div class="box-text">
+                                        <strong>특별한 건강·의료 어려움 없음</strong>
+                                        <p>일반 건강검진 및 예방의료 정보만 확인 희망</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 질문 3: 일상 돌봄 및 요양 간병 상황 -->
+                    <div class="survey-step" id="surveyStep3">
+                        <div class="question-title">
+                            <span class="q-badge">Q3</span>
+                            <h3>가정 내 돌봄이나 간병 지원이 절실한 상황인가요?</h3>
+                        </div>
+                        <p class="question-hint">현재 또는 가까운 미래에 도움이 필요한 항목을 체크하세요.</p>
+                        <div class="option-grid">
+                            <label class="check-box-card">
+                                <input type="checkbox" name="care" value="home_care" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🏠</div>
+                                    <div class="box-text">
+                                        <strong>거동이 불편하여 집으로 의사/간호사가 와주었으면 함</strong>
+                                        <p>2026 통합돌봄 전국 확대: 재택의료 및 방문간호 서비스</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="care" value="child_care" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🍼</div>
+                                    <div class="box-text">
+                                        <strong>맞벌이 등으로 영유아/초등 돌봄 공백이 발생함</strong>
+                                        <p>아이돌봄 서비스, 국공립 보육시설, 시간제 보육 지원</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="care" value="disability_care" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🤝</div>
+                                    <div class="box-text">
+                                        <strong>장애인 가족의 일상 보조 및 24시간 돌봄 필요</strong>
+                                        <p>최중증 발달장애인 통합돌봄 및 장애인 활동지원사 파견</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="care" value="none" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">👌</div>
+                                    <div class="box-text">
+                                        <strong>현재 별도의 가족 돌봄·간병 필요 없음</strong>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 질문 4: 경제적 생활 안정 및 긴급 상황 -->
+                    <div class="survey-step" id="surveyStep4">
+                        <div class="question-title">
+                            <span class="q-badge">Q4</span>
+                            <h3>가계 경제 상황 또는 긴급 위기 상황에 해당하시나요?</h3>
+                        </div>
+                        <p class="question-hint">해당되는 항목을 모두 선택해 주시면 맞춤 지원 제도를 연결합니다.</p>
+                        <div class="option-grid">
+                            <label class="check-box-card alert-border">
+                                <input type="checkbox" name="economic" value="emergency" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle alert-circle">🚨</div>
+                                    <div class="box-text">
+                                        <strong>실직, 중병, 사고 등으로 당장 생계 유지가 막막함</strong>
+                                        <p>긴급복지지원(국번없이 129)을 통해 즉각적인 생계·의료비 지원 가능</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="economic" value="low_income" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">📉</div>
+                                    <div class="box-text">
+                                        <strong>소득이 최저생계비에 못 미치거나 기초수급을 희망함</strong>
+                                        <p>기준중위소득 상향 및 의료급여 부양비 완화에 따른 기초생활보장</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="economic" value="senior_job" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">💼</div>
+                                    <div class="box-text">
+                                        <strong>은퇴 후 노인 일자리나 사회참여 활동을 찾고 있음</strong>
+                                        <p>공익활동, 시장형 노인일자리, 시니어 인턴십 프로그램 연계</p>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="check-box-card">
+                                <input type="checkbox" name="economic" value="stable" onchange="updateSurveyUI()">
+                                <div class="box-content">
+                                    <div class="icon-circle">🛡️</div>
+                                    <div class="box-text">
+                                        <strong>경제적으로 안정적이며 보편 복지 정보 확인 희망</strong>
+                                        <p>국민연금, 건강보험, 일반 예방 바우처 등 보편 제도 탐색</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 설문 네비게이션 버튼 -->
+                    <div class="survey-buttons">
+                        <button type="button" class="btn-survey-prev" id="btnSurveyPrev" onclick="navigateSurvey(-1)" style="display: none;">
+                            ← 이전 단계
+                        </button>
+                        <button type="button" class="btn-survey-next" id="btnSurveyNext" onclick="navigateSurvey(1)">
+                            다음 단계 →
+                        </button>
+                        <button type="button" class="btn-survey-submit" id="btnSurveySubmit" onclick="submitSurvey()" style="display: none;">
+                            🎯 결과 진단하기
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 분석 결과 표시 컨테이너 (초기 숨김) -->
+                <div id="surveyResultContainer" class="survey-result-container" style="display: none;">
+                    <div class="result-banner">
+                        <div class="result-icon">📋</div>
+                        <div>
+                            <h3>국민 맞춤형 복지 진단 결과표</h3>
+                            <p id="resultSummaryText">선택하신 가구 특성과 여건에 따라 총 0건의 핵심 혜택을 찾았습니다.</p>
+                        </div>
+                        <button type="button" class="btn-restart" onclick="restartSurvey()">🔄 다시 설문하기</button>
+                    </div>
+
+                    <div id="matchedBenefitsList" class="matched-benefits-list">
+                        <!-- JS에서 동적으로 매칭된 맞춤 카드 렌더링 -->
+                    </div>
+
+                    <!-- 원스톱 콜센터 및 오프라인 신청 가이드 -->
+                    <div class="apply-guide-banner">
+                        <h4>📢 어떻게 신청하고 도움을 받나요?</h4>
+                        <div class="guide-steps">
+                            <div class="g-step">
+                                <span class="num">1</span>
+                                <div>
+                                    <strong>온라인 원스톱 신청</strong>
+                                    <p><a href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로(bokjiro.go.kr)</a>에 접속하여 간편인증 후 '복지서비스 신청' 진행</p>
+                                </div>
+                            </div>
+                            <div class="g-step">
+                                <span class="num">2</span>
+                                <div>
+                                    <strong>전화 상담 (24시간)</strong>
+                                    <p>보건복지상담센터 <strong>국번없이 129</strong>로 전화하시면 전문상담사가 1:1로 절차를 안내합니다.</p>
+                                </div>
+                            </div>
+                            <div class="g-step">
+                                <span class="num">3</span>
+                                <div>
+                                    <strong>동 주민센터 방문</strong>
+                                    <p>주소지 관할 읍·면·동 행정복지센터(주민센터) '찾아가는 복지팀'에 신분증을 지참하고 방문 상담</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 기관 소개 및 비전 섹션 -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-label">ABOUT MOHW</span>
+                <h2>보건복지부는 어떤 일을 하나요?</h2>
+                <p>국민의 기본 생활을 보장하고 건강 증진과 질병 예방을 총괄하는 대한민국 중앙행정기관입니다.</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card feature-highlight">
+                    <div class="card-icon">🏛️</div>
+                    <h3>설립 목적 및 역할</h3>
+                    <p>
+                        보건위생·방역·의정·약정 등 국민 보건의료 향상과 생활유지 능력이 없거나 어려운 국민의 최저생활 보장,
+                        자활 지원, 아동·노인·장애인 복지 증진을 관장합니다.
+                    </p>
+                    <ul class="bullet-list">
+                        <li><strong>보건의료:</strong> 필수의료 확충, 건강보험 보장성, 감염병 예방 관리</li>
+                        <li><strong>사회복지:</strong> 기초생활보장, 긴급복지 지원, 고독사 예방</li>
+                        <li><strong>인구정책:</strong> 저출산 고령사회 극복, 아동돌봄체계 강화</li>
+                        <li><strong>사회보험:</strong> 국민연금, 국민건강보험, 노인장기요양보험 운영 총괄</li>
+                    </ul>
+                </div>
+
+                <div class="about-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>핵심 정책 4대 목표</h3>
+                    <div class="goal-item">
+                        <span class="goal-num">01</span>
+                        <div>
+                            <h4>돌봄의 국가 책임 강화</h4>
+                            <p>살던 곳에서 존엄한 노후를 보낼 수 있는 통합돌봄 전국 확대</p>
+                        </div>
+                    </div>
+                    <div class="goal-item">
+                        <span class="goal-num">02</span>
+                        <div>
+                            <h4>더 두텁고 촘촘한 약자복지</h4>
+                            <p>기준중위소득 상향 및 위기가구 선제적 발굴 시스템 고도화</p>
+                        </div>
+                    </div>
+                    <div class="goal-item">
+                        <span class="goal-num">03</span>
+                        <div>
+                            <h4>지역·필수·공공의료 개혁</h4>
+                            <p>지역 필수의료 특별회계 신설 및 필수의료 인력 확보 인프라 혁신</p>
+                        </div>
+                    </div>
+                    <div class="goal-item">
+                        <span class="goal-num">04</span>
+                        <div>
+                            <h4>미래 대비 바이오헬스·AI 혁신</h4>
+                            <p>AI 헬스케어 인프라 구축, 디지털 치료기기 및 바이오 신약 육성</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 국민 눈높이 주요 업무 상세 섹션 -->
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-label">KEY SERVICES</span>
+                <h2>국민의 삶을 바꾸는 5대 주요 영역</h2>
+                <p>알기 쉬운 키워드로 만나는 보건복지부의 핵심 서비스입니다.</p>
+            </div>
+
+            <!-- 탭 전환 UI -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('welfare')">1. 기초복지 & 돌봄</button>
+                <button class="tab-btn" onclick="switchTab('medical')">2. 보건의료 & 건강보험</button>
+                <button class="tab-btn" onclick="switchTab('child')">3. 출산·육아 & 아동</button>
+                <button class="tab-btn" onclick="switchTab('senior')">4. 어르신 & 노후보장</button>
+                <button class="tab-btn" onclick="switchTab('disability')">5. 장애인 자립 지원</button>
+            </div>
+
+            <div class="tab-contents">
+                <!-- 1. 기초복지 -->
+                <div id="tab-welfare" class="tab-panel active">
+                    <div class="panel-inner">
+                        <div class="panel-text">
+                            <h3>소외 없는 든든한 기초생활보장</h3>
+                            <p class="summary">경제적 위기에 처한 국민이 삶의 희망을 잃지 않도록 생계, 주거, 의료, 교육 급여를 제공하고 긴급상황 시 신속하게 지원합니다.</p>
+                            <div class="service-points">
+                                <div class="point-box">
+                                    <strong>생계급여 기준 대폭 인상</strong>
+                                    <span>기준중위소득 역대 최고 수준 반영으로 취약계층 최저생활을 더욱 두텁게 보장합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>복지 사각지대 발굴 고도화</strong>
+                                    <span>단전, 단수, 건강보험료 체납 등 공공 빅데이터를 연계해 위기가구를 먼저 찾아갑니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>긴급복지지원제도</strong>
+                                    <span>주소득자 사망, 실직, 중한 질병 등으로 위기에 처한 가구에 신속한 생계비 및 의료비를 즉시 지원합니다.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-graphic">
+                            <div class="graphic-card">
+                                <h4>위기 가구 상담 안내</h4>
+                                <div class="hotline">
+                                    <span class="call-icon">📞</span>
+                                    <span class="phone-num">국번없이 129</span>
+                                </div>
+                                <p>보건복지상담센터는 연중무휴 24시간 상담과 긴급 지원을 연결해 드립니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 보건의료 -->
+                <div id="tab-medical" class="tab-panel">
+                    <div class="panel-inner">
+                        <div class="panel-text">
+                            <h3>언제 어디서나 안심하는 필수의료 & 건강보험</h3>
+                            <p class="summary">지역에 상관없이 응급, 소아, 심뇌혈관 등 중증·응급질환 치료를 받을 수 있는 의료체계를 만들고 건강보험 재정을 안정화합니다.</p>
+                            <div class="service-points">
+                                <div class="point-box">
+                                    <strong>지역완결형 필수의료체계</strong>
+                                    <span>지역 국립대병원 및 권역책임의료기관 육성을 통해 고난도 진료를 지역 내에서 완결합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>국민건강보험 보장 & 재난적 의료비</strong>
+                                    <span>과도한 의료비 지출로 인한 가계 파탄을 방지하기 위해 중증질환 의료비 지원을 최대화합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>비대면 진료 안전 제도화</strong>
+                                    <span>의료취약지 거주민, 야간·휴일 경증 환자 등의 의료 접근성을 합리적 기준으로 보장합니다.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-graphic">
+                            <div class="graphic-card">
+                                <h4>건강보험 혜택 안내</h4>
+                                <div class="hotline">
+                                    <span class="call-icon">🏥</span>
+                                    <span class="phone-num">1577-1000</span>
+                                </div>
+                                <p>국민건강보험공단 고객센터에서 보험료, 검진, 진료비 지원 상담을 제공합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 출산 육아 -->
+                <div id="tab-child" class="tab-panel">
+                    <div class="panel-inner">
+                        <div class="panel-text">
+                            <h3>아이 낳고 키우기 좋은 든든한 사회</h3>
+                            <p class="summary">임신 준비부터 출산, 영유아기 돌봄까지 부모의 양육 부담을 덜어주고 아동이 안전하게 성장할 수 있도록 지원합니다.</p>
+                            <div class="service-points">
+                                <div class="point-box">
+                                    <strong>첫만남이용권 & 부모급여</strong>
+                                    <span>출생 초기 양육비 부담을 줄이기 위해 부모급여와 바우처를 폭넓게 지급합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>임신 사전건강관리 및 난임 시술 지원</strong>
+                                    <span>필수 가임력 검사비 지원 확대 및 사실혼·소득무관 난임시술비 지원으로 출산 의지를 응원합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>초등 늘봄학교 및 공공돌봄 확충</strong>
+                                    <span>국공립 어린이집 확충과 방과 후 돌봄을 강화하여 틈새 없는 안심 돌봄을 구축합니다.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-graphic">
+                            <div class="graphic-card">
+                                <h4>아이돌봄 및 양육 수당</h4>
+                                <div class="hotline">
+                                    <span class="call-icon">👶</span>
+                                    <span class="phone-num">복지로 사이트</span>
+                                </div>
+                                <p>bokjiro.go.kr에서 부모급여, 아동수당, 첫만남이용권을 온라인으로 원스톱 신청하세요.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 어르신 노후 -->
+                <div id="tab-senior" class="tab-panel">
+                    <div class="panel-inner">
+                        <div class="panel-text">
+                            <h3>초고령사회, 건강하고 활기찬 100세 인생</h3>
+                            <p class="summary">살던 정든 집과 동네에서 의료와 요양, 돌봄을 통합적으로 누리며 안정적인 노후 소득을 지탱합니다.</p>
+                            <div class="service-points">
+                                <div class="point-box">
+                                    <strong>의료·요양·돌봄 통합지원 전국 시행</strong>
+                                    <span>어르신이 병원이나 시설 대신 집에서 지낼 수 있도록 방문진료와 재가요양 서비스를 원스톱 제공합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>기초연금 및 노인일자리 확대</strong>
+                                    <span>기초연금 지속 현실화와 양질의 어르신 맞춤형 사회활동·민간일자리를 100만 개 이상 창출합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>치매국가책임제 고도화</strong>
+                                    <span>치매안심센터를 통해 조기검진부터 치매치료관리비 지원, 쉼터 프로그램까지 밀착 관리합니다.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-graphic">
+                            <div class="graphic-card">
+                                <h4>국민연금 & 기초연금 문의</h4>
+                                <div class="hotline">
+                                    <span class="call-icon">👵</span>
+                                    <span class="phone-num">국번없이 1355</span>
+                                </div>
+                                <p>국민연금공단을 통해 내 연금 알아보기, 기초연금 수급자격 모의계산이 가능합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 장애인 지원 -->
+                <div id="tab-disability" class="tab-panel">
+                    <div class="panel-inner">
+                        <div class="panel-text">
+                            <h3>차별 없는 자립생활과 맞춤형 권익 신장</h3>
+                            <p class="summary">장애인의 개별 욕구와 필요에 맞춘 활동지원서비스, 이동권 보장, 일자리 창출을 지원합니다.</p>
+                            <div class="service-points">
+                                <div class="point-box">
+                                    <strong>최중증 발달장애인 통합돌봄</strong>
+                                    <span>24시간 개별 돌봄 등 최중증 발달장애인과 가족의 돌봄 부담을 획기적으로 경감합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>장애인 개인예산제 단계적 확대</strong>
+                                    <span>주어진 바우처를 필요한 재활·교육·문화 서비스에 직접 맞춤형으로 사용할 수 있도록 혁신합니다.</span>
+                                </div>
+                                <div class="point-box">
+                                    <strong>장애인 연금 및 보조기기 보급</strong>
+                                    <span>중증장애인의 기초소득 보장과 일상생활 편의 증진을 위한 특수 맞춤 보조기기 보급을 넓힙니다.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-graphic">
+                            <div class="graphic-card">
+                                <h4>장애인 맞춤 복지 안내</h4>
+                                <div class="hotline">
+                                    <span class="call-icon">♿</span>
+                                    <span class="phone-num">주민센터 복지팀</span>
+                                </div>
+                                <p>관할 읍면동 행정복지센터 방문 시 장애등록부터 맞춤 급여까지 안내받으실 수 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2025-2026 주요 정책 동향 섹션 -->
+    <section id="trends" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-label">POLICY TRENDS</span>
+                <h2>지금 주목해야 할 보건복지 주요 동향</h2>
+                <p>2025~2026년 국민 생활에 가장 큰 변화를 가져올 핵심 정책 이슈입니다.</p>
+            </div>
+
+            <div class="trend-cards">
+                <div class="trend-card">
+                    <div class="trend-tag tag-blue">2026 핵심 사업</div>
+                    <h3>의료·요양·돌봄 통합지원 전국 시행</h3>
+                    <p class="trend-desc">
+                        거동이 불편한 어르신과 환자가 요양시설에 가지 않고도, 살던 집에서 왕진 의사와 방문간호사, 요양보호사의 방문 돌봄을 통합적으로 받을 수 있는 한국형 에이징 인 플레이스(Aging in Place)가 본격 가동됩니다.
+                    </p>
+                    <div class="trend-highlight">
+                        <span>💡 효과:</span> 가족 돌봄 부담 대폭 완화, 불필요한 장기입원 감소
+                    </div>
+                </div>
+
+                <div class="trend-card">
+                    <div class="trend-tag tag-green">의료 체계 혁신</div>
+                    <h3>지역 완결형 필수의료 & 수급추계위</h3>
+                    <p class="trend-desc">
+                        ‘응급실 뺑뺑이’, ‘소아과 대기열’ 문제를 근본적으로 해소하기 위해 지역 필수·공공의료 투자를 대폭 확대하고, 미래 의료인력 수요를 과학적으로 산출하는 의료인력 수급추계위원회를 본격 가동합니다.
+                    </p>
+                    <div class="trend-highlight">
+                        <span>💡 효과:</span> 지방 거주민도 골든타임 내 최고 수준 수술·치료 가능
+                    </div>
+                </div>
+
+                <div class="trend-card">
+                    <div class="trend-tag tag-purple">복지 혁신</div>
+                    <h3>약자복지 강화 및 부양의무자 기준 대폭 개선</h3>
+                    <p class="trend-desc">
+                        실제 생활이 어려움에도 서류상 부양의무자 때문에 탈락하던 복지 사각지대를 방지하기 위해 의료급여 부양비 기준을 전면 개선하고, 생계급여 지급 기준을 인상하여 최후의 사회적 안전망을 공고히 합니다.
+                    </p>
+                    <div class="trend-highlight">
+                        <span>💡 효과:</span> 비수급 빈곤층 십수만 가구 신규 구제 및 기초생활 보장
+                    </div>
+                </div>
+
+                <div class="trend-card">
+                    <div class="trend-tag tag-orange">디지털 미래</div>
+                    <h3>AI 헬스케어 인프라 & 바이오헬스 혁신</h3>
+                    <p class="trend-desc">
+                        글로벌 ‘AI 헬스케어 서울선언문’ 발표 등 국제적 협력과 함께, 의료 빅데이터 안전 연계, AI 암 조기진단 솔루션 보급, 바이오 신약·디지털 치료기기 임상 지원 등 미래 헬스케어 생태계를 조성합니다.
+                    </p>
+                    <div class="trend-highlight">
+                        <span>💡 효과:</span> 질병 사전 예측 치료, 신약 개발 기간 및 의료비 획기적 단축
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 인터랙티브 복지 혜택 모의 찾기 툴 (JS 기능) -->
+    <section id="quick-guide" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-label">SMART FINDER</span>
+                <h2>나에게 맞는 보건복지 혜택 즉시 알아보기</h2>
+                <p>본인의 상황을 선택하시면 관련 주요 지원 정책과 바로가기 정보를 보여드립니다.</p>
+            </div>
+
+            <div class="finder-box">
+                <div class="finder-controls">
+                    <div class="control-group">
+                        <label for="lifecycleSelect">생애주기 / 대상</label>
+                        <select id="lifecycleSelect" onchange="filterBenefits()">
+                            <option value="all">전체 (생애주기 무관)</option>
+                            <option value="infant">영유아 / 임산부</option>
+                            <option value="youth">청년 / 근로자</option>
+                            <option value="senior">노년층 (어르신)</option>
+                            <option value="vulnerable">취약계층 / 한부모</option>
+                            <option value="disability">등록 장애인</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="needSelect">가장 필요한 지원 분야</label>
+                        <select id="needSelect" onchange="filterBenefits()">
+                            <option value="all">전체 분야</option>
+                            <option value="health">병원비·건강·의료</option>
+                            <option value="living">생계·현금성 지원</option>
+                            <option value="care">돌봄·간병·보육</option>
+                            <option value="job">일자리·사회활동</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group search-group">
+                        <label for="keywordInput">검색어 (예: 부모, 치매, 긴급)</label>
+                        <input type="text" id="keywordInput" placeholder="키워드 입력..." oninput="filterBenefits()">
+                    </div>
+                </div>
+
+                <!-- 필터링 결과 카드 리스트 -->
+                <div id="benefitResults" class="benefit-results-grid">
+                    <!-- JS에서 동적으로 렌더링 -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 보도자료 및 최신 뉴스 섹션 (실제 URL 탑재) -->
+    <section id="news" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="sub-label">PRESS & NEWS</span>
+                <h2>보건복지부 최신 보도자료 및 소식</h2>
+                <p>대한민국 정책브리핑 및 보건복지부 공식 소식 페이지와 바로 연결됩니다.</p>
+            </div>
+
+            <div class="news-grid">
+                <!-- 뉴스 카드 1 -->
+                <article class="news-card">
+                    <div class="news-meta">
+                        <span class="news-badge">정책 보도자료</span>
+                        <span class="news-date">보건복지부 공식</span>
+                    </div>
+                    <h3 class="news-title">
+                        <a href="https://www.mohw.go.kr" target="_blank" rel="noopener noreferrer">
+                            2026년도 보건복지부 예산 137조 5천억 원 확정 및 중점 추진계획 발표
+                        </a>
+                    </h3>
+                    <p class="news-snippet">
+                        의료·요양·돌봄 통합지원의 전국적 안착과 취약계층 기준중위소득 상향, 필수의료 인프라 확충에 중점 투자합니다.
+                    </p>
+                    <div class="news-footer">
+                        <span class="source-tag">대한민국 보건복지부</span>
+                        <a href="https://www.mohw.go.kr" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                            원문 보기 ↗
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 뉴스 카드 2 -->
+                <article class="news-card">
+                    <div class="news-meta">
+                        <span class="news-badge badge-green">디지털 헬스</span>
+                        <span class="news-date">정책브리핑 배포</span>
+                    </div>
+                    <h3 class="news-title">
+                        <a href="https://www.korea.kr" target="_blank" rel="noopener noreferrer">
+                            ‘AI 헬스케어 서울선언문’ 공동 발표… 인공지능 보건의료 시대 본격 개막
+                        </a>
+                    </h3>
+                    <p class="news-snippet">
+                        AI 기반 암·심혈관 질환 조기 진단 보급 및 의료데이터의 안전한 활용 표준을 수립하여 글로벌 경쟁력을 강화합니다.
+                    </p>
+                    <div class="news-footer">
+                        <span class="source-tag">대한민국 정책브리핑 (korea.kr)</span>
+                        <a href="https://www.korea.kr" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                            원문 보기 ↗
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 뉴스 카드 3 -->
+                <article class="news-card">
+                    <div class="news-meta">
+                        <span class="news-badge badge-purple">사회복지</span>
+                        <span class="news-date">복지로 안내</span>
+                    </div>
+                    <h3 class="news-title">
+                        <a href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">
+                            노인맞춤돌봄 및 통합재가서비스 확대… “살던 곳에서 건강한 노후 보장”
+                        </a>
+                    </h3>
+                    <p class="news-snippet">
+                        재택의료센터 및 안심돌봄 서비스 연계를 통해 시설 중심에서 가정·지역사회 중심의 돌봄 안전망으로 패러다임을 전환합니다.
+                    </p>
+                    <div class="news-footer">
+                        <span class="source-tag">복지로 (bokjiro.go.kr)</span>
+                        <a href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                            원문 보기 ↗
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 뉴스 카드 4 -->
+                <article class="news-card">
+                    <div class="news-meta">
+                        <span class="news-badge badge-orange">국민건강</span>
+                        <span class="news-date">건강보험 소식</span>
+                    </div>
+                    <h3 class="news-title">
+                        <a href="https://www.nhis.or.kr" target="_blank" rel="noopener noreferrer">
+                            중증·희귀질환 치료제 건강보험 급여 확대 및 재난적 의료비 지원 강화
+                        </a>
+                    </h3>
+                    <p class="news-snippet">
+                        치료비 부담이 막대한 고가 신약의 급여 등재를 가속화하고 저소득층 의료비 본인부담 상한액을 낮춰 국민 삶을 보호합니다.
+                    </p>
+                    <div class="news-footer">
+                        <span class="source-tag">국민건강보험공단 (nhis.or.kr)</span>
+                        <a href="https://www.nhis.or.kr" target="_blank" rel="noopener noreferrer" class="link-arrow">
+                            원문 보기 ↗
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 공식 채널 링크 모음 -->
+            <div class="official-links-banner">
+                <div class="banner-title">
+                    <h4>🔗 보건복지 공식 플랫폼 바로가기</h4>
+                    <p>각 기관 사이트에서 최신 공고, 민원 신청, 제도 매뉴얼을 실시간으로 확인하실 수 있습니다.</p>
+                </div>
+                <div class="banner-links">
+                    <a href="https://www.mohw.go.kr" target="_blank" rel="noopener noreferrer" class="btn-banner">보건복지부 공식홈 ↗</a>
+                    <a href="https://www.korea.kr" target="_blank" rel="noopener noreferrer" class="btn-banner">대한민국 정책브리핑 ↗</a>
+                    <a href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer" class="btn-banner">복지로 포털 ↗</a>
+                    <a href="https://www.nhis.or.kr" target="_blank" rel="noopener noreferrer" class="btn-banner">국민건강보험공단 ↗</a>
+                    <a href="https://www.nps.or.kr" target="_blank" rel="noopener noreferrer" class="btn-banner">국민연금공단 ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-info">
+                <h3>대한민국 보건복지부 (Ministry of Health and Welfare)</h3>
+                <p>본 애플리케이션은 보건복지부의 주요 업무와 정책 동향을 국민이 쉽게 이해할 수 있도록 제작된 안내 웹 앱입니다.</p>
+                <p class="contact-info">
+                    보건복지상담센터: 국번없이 <strong>129</strong> (24시간 무료상담) | 주소: 세종특별자치시 도움4로 13 정부세종청사 10동
+                </p>
+            </div>
+            <div class="footer-links">
+                <a href="https://www.mohw.go.kr" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>
+                <a href="https://www.mohw.go.kr" target="_blank" rel="noopener noreferrer">이용약관</a>
+                <a href="https://www.mohw.go.kr" target="_blank" rel="noopener noreferrer">찾아오시는 길</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 Ministry of Health and Welfare Guide Web App. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
